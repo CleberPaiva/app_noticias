@@ -17,6 +17,10 @@ class FavoritePresenter(
         this.dataSource.saveArticle(article)
     }
 
+    fun deleteArticle(article: Article) {
+        this.dataSource.deleteArticles(article)
+    }
+
     override fun onSuccess(articles: List<Article>) {
         this.view.showArticles(articles)
     }
