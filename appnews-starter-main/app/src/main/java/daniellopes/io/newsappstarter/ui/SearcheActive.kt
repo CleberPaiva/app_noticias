@@ -1,5 +1,6 @@
 package daniellopes.io.newsappstarter.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -30,10 +31,11 @@ class SearcheActive : AbstractActivity(), ViewHome.View {
 
     override fun onInject() {
 
-        val dataSource = NewsDataSource()
+        val dataSource = NewsDataSource(this)
         presenter = SearchPresenter(this, dataSource)
         configRecycle()
         search()
+        clickAdapter()
     }
 
     private fun search(){
@@ -63,6 +65,15 @@ class SearcheActive : AbstractActivity(), ViewHome.View {
             )
         }
     }
+
+    private fun clickAdapter(){
+        mainAdapter.setOnclickListener { article ->
+            val intent = Intent(this, ArticleActivity::class.java)
+            intent.putExtra("article", article)
+            startActivity(intent)
+        }
+    }
+
     override fun showProgressBar() {
         rvProgressBarSearch.visibility = View.VISIBLE
     }

@@ -27,10 +27,11 @@ class MainActivity : AbstractActivity(), ViewHome.View {
 
     override fun onInject() {
 
-        val dataSource = NewsDataSource()
+        val dataSource = NewsDataSource(this)
         presenter = NewsPresenter(this, dataSource)
         presenter.requestAll()
         configRecycle()
+        clickAdapter()
     }
 
     private fun configRecycle(){
@@ -42,6 +43,14 @@ class MainActivity : AbstractActivity(), ViewHome.View {
                     this@MainActivity, DividerItemDecoration.VERTICAL
                 )
             )
+        }
+    }
+
+    private fun clickAdapter(){
+        mainAdapter.setOnclickListener { article ->
+            val intent = Intent(this, ArticleActivity::class.java)
+            intent.putExtra("article", article)
+            startActivity(intent)
         }
     }
 
