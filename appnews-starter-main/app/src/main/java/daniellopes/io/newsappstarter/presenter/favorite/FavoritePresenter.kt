@@ -8,6 +8,10 @@ class FavoritePresenter(
     val view: ViewHome.Favorite,
     private val dataSource: NewsDataSource): FavoriteHome.Presenter {
 
+    fun getAll(){
+        this.dataSource.getAllArticle(this)
+    }
+
 
     fun saveArticle(article: Article) {
         this.dataSource.saveArticle(article)
